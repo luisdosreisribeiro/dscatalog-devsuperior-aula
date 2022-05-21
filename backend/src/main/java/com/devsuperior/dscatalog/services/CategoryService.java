@@ -1,7 +1,6 @@
 package com.devsuperior.dscatalog.services;
 
 import java.util.List;
-import java.util.Locale.Category;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -33,5 +32,16 @@ public class CategoryService {
 		Optional<com.devsuperior.dscatalog.entities.Category> obj = categoryRepository.findById(id);
 		com.devsuperior.dscatalog.entities.Category entity = obj.orElseThrow(() -> new EntityNotFoundException("Entidade não encontrada"));
 		return new CategoryDTO(entity);
+	}
+
+	@Transactional
+	public CategoryDTO insert(CategoryDTO dto) {
+		com.devsuperior.dscatalog.entities.Category entity =  new com.devsuperior.dscatalog.entities.Category();
+		entity.setName(dto.getName());
+		entity = categoryRepository.save(entity);
+		return new CategoryDTO(entity);
+		
+		
+		
 	}
 }
