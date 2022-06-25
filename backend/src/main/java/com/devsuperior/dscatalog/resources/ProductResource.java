@@ -71,7 +71,7 @@ public class ProductResource {
 	
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Long id){
-		productService.update(id);
+		productService.delete(id);
 		return ResponseEntity.noContent().build();
 	}
 	
