@@ -20,6 +20,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.devsuperior.dscatalog.dto.UserDTO;
 import com.devsuperior.dscatalog.dto.UserInsertDTO;
+import com.devsuperior.dscatalog.dto.UserUpdateDTO;
 import com.devsuperior.dscatalog.services.UserService;
 
 @RestController
@@ -56,12 +57,12 @@ public class UserResource {
 	
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<UserDTO>atualizar(@Valid @RequestBody UserDTO dto, @PathVariable Long id){
+	public ResponseEntity<UserDTO>atualizar(@Valid @RequestBody UserUpdateDTO dto, @PathVariable Long id){
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(dto.getId()).toUri();
 		
-		 dto = userService.atualizar(dto, id);
+		UserDTO newDto = userService.atualizar(dto, id);
 		return ResponseEntity.created(uri).body(dto);
 				
 	}
